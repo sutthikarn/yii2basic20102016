@@ -42,9 +42,10 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels'=> FALSE,
         'items' => [
-            ['label' => '<span class="glyphicon glyphicon-home"></span> หน้แรก', 'url' => ['/site/index']],
+            ['label' => '<span class="glyphicon glyphicon-home"></span> หน้าแรก', 'url' => ['/site/index']],
             ['label' => '<span class="glyphicon glyphicon-leaf"></span> เกี่ยวกับ', 'url' => ['/site/about']],
             ['label' => '<span class="glyphicon glyphicon-earphone"></span> ติดต่อ', 'url' => ['/site/contact']],
+             ['label' => '<span class="glyphicon glyphicon-earphone"></span> ทดสอบ1', 'url' => ['/first1/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
