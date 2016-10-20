@@ -25,35 +25,50 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-
     <div>
-            <img src="<?=  Yii::getAlias('@web')?>/img/header.png" class="img-responsive" alt="header" >
-    </div>
-    <?php
+              <img src="<?=  Yii::getAlias('@web')?>/img/header.png" class="img-responsive" alt="header" >
+            </div>
     
+       
+    
+    
+    <?php
     NavBar::begin([
-        'brandLabel' => '<span class="glyphicon glyphicon-globe"></span>ICOH',
+        'brandLabel' => '<span class="glyphicon glyphicon-tree-deciduous">ICOH',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse ',//navbar-fixed-top
+            'class' => 'navbar-inverse',
         ],
-        
     ]);
+    
+    
     $setting=[
-    ['label'=> 'สถานคอมพิใเตอร์', 'url'=>['/comstatus']],   
+        ['label' => 'สถานะคอมพิวเตอร์','url' => ['/comstatus']],
+        ['label' => 'ประเภทคอมพิวเตอร์','url' => ['/com-type']],
     ];
+       $regist = [
+                ['label' => 'ทะเบียนคอมพิวเตอร์', 'url' => ['/com']], ];
+       
+             $report = [
+                ['label' => 'รายงานความพิวเตอร์', 'url' => ['/reportcomtype']],
+                ['label' => 'รายงานปัญหาคอมพิวเตอร์', 'url' => ['/reportcomservice']],
+                ['label' => 'กราฟสรุปรายงานคอมพิวเตอร์', 'url' => ['/chartcom']],
+              
+            ];
+    
+    
     
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'encodeLabels'=> FALSE,
+        'encodeLabels' => FALSE,
         'items' => [
-            ['label' => '<span class="glyphicon glyphicon-home"></span> หน้าแรก', 'url' => ['/site/index']],
-            ['label' => '<span class="glyphicon glyphicon-leaf"></span> เกี่ยวกับ', 'url' => ['/site/about']],
-            ['label' => '<span class="glyphicon glyphicon-earphone"></span> ติดต่อ', 'url' => ['/site/contact']],
-             ['label' => '<span class="glyphicon glyphicon-earphone"></span> ทดสอบ1', 'url' => ['/first1/index']],
-            ['label' => 'ตั้งค่าระบบ ', 'items' => $setting],
+            ['label' => '<span class="glyphicon glyphicon-home"</span> หน้าแรก', 'url' => ['/site/index']],
+               ['label' => '<span class="glyphicon glyphicon-pencil"</span> ลงทะเบียน', 'items' =>$regist],
+           ['label' => '<span class="glyphicon glyphicon-list-alt"</span> ระบบรายงาน', 'items' =>$report],
+             ['label' => '<span class="glyphicon glyphicon-play"</span> ทดสอบ', 'url' => ['/first1']],
+            ['label' => '<span class="glyphicon glyphicon-cog"</span> ตั้งค่าระบบ', 'items' =>$setting],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => '<span class="glyphicon glyphicon-transfer"</span> ล็อกอิน', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
