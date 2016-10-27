@@ -34,7 +34,7 @@ AppAsset::register($this);
     
     <?php
     NavBar::begin([
-        'brandLabel' => '<span class="glyphicon glyphicon-tree-deciduous">ICOH',
+        'brandLabel' => '<span class="glyphicon glyphicon-globe"> ICOH',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse',
@@ -53,6 +53,7 @@ AppAsset::register($this);
                 ['label' => 'รายงานความพิวเตอร์', 'url' => ['/reportcomtype']],
                 ['label' => 'รายงานปัญหาคอมพิวเตอร์', 'url' => ['/reportcomservice']],
                 ['label' => 'กราฟสรุปรายงานคอมพิวเตอร์', 'url' => ['/chartcom']],
+                ['label' => 'รายงานประเภทคอมพิวเตอร์(pdf)', 'url' => ['/pdftest']],
               
             ];
     
@@ -63,17 +64,17 @@ AppAsset::register($this);
         'encodeLabels' => FALSE,
         'items' => [
             ['label' => '<span class="glyphicon glyphicon-home"</span> หน้าแรก', 'url' => ['/site/index']],
-               ['label' => '<span class="glyphicon glyphicon-pencil"</span> ลงทะเบียน', 'items' =>$regist],
-           ['label' => '<span class="glyphicon glyphicon-list-alt"</span> ระบบรายงาน', 'items' =>$report],
-             ['label' => '<span class="glyphicon glyphicon-play"</span> ทดสอบ', 'url' => ['/first1']],
-            ['label' => '<span class="glyphicon glyphicon-cog"</span> ตั้งค่าระบบ', 'items' =>$setting],
-            Yii::$app->user->isGuest ? (
-                ['label' => '<span class="glyphicon glyphicon-transfer"</span> ล็อกอิน', 'url' => ['/site/login']]
+            ['label' => '<span class="glyphicon glyphicon-pencil"</span> ลงทะเบียน', 'items' =>$regist,'visible'=>Yii::$app->session->has('username')],
+            ['label' => '<span class="glyphicon glyphicon-folder-open"</span> ระบบรายงาน', 'items' =>$report],
+            ['label' => '<span class="glyphicon glyphicon-paperclip"</span> ทดสอบ', 'url' => ['/first1']],
+            ['label' => '<span class="glyphicon glyphicon-cog"</span> ตั้งค่าระบบ', 'items' =>$setting,'visible'=>Yii::$app->session->has('username')],
+            !Yii::$app->session->get('username')? (
+                ['label' => '<span class="glyphicon glyphicon-user"</span> ล็อกอิน', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Logout (' . Yii::$app->session->get('username') . ')',
                     ['class' => 'btn btn-link']
                 )
                 . Html::endForm()
